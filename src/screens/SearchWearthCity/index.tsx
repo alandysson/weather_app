@@ -1,13 +1,11 @@
-import { View, Text, TextInput, TouchableOpacity, Image, ActivityIndicator } from "react-native";
+import { View, Text, Image, ActivityIndicator } from "react-native";
 import { api } from "../../service/api";
-import { useEffect, useState } from "react";
-import data from "../../../data.json";
+import { useState } from "react";
 import {
   ButtonText,
-  CardInformations,
   CurrentInformationView,
   CustomButton,
-  InfoCard,
+  DescriptionView,
   Input,
   SearchContainer,
   TextWhite,
@@ -15,7 +13,6 @@ import {
   WeatherDescription,
   WeatherTemperature,
 } from "./styles";
-import dayjs from "dayjs";
 import { BackButton } from "../../components/BackButton";
 
 type CurrentInformations = {
@@ -42,15 +39,13 @@ export const SearchWearthCity = () => {
   );
   const [cityWearthData, setCityWearthData] = useState<WeatherInformation>({} as WeatherInformation);
   const [loading, setLoading] = useState<boolean>(false);
-
+  const apiKey = process.env.EXPO_PUBLIC_API_KEY;
   const getData = async () => {
     if (!citySearch) return alert("Digite uma cidade");
 
     setLoading(true);
     try {
-      const { data } = await api.get(
-        `weather?q=${citySearch}&appid=fd8bc8a1052edaa97828bcbded7083c3&units=metric&lang=pt_br`
-      );
+      const { data } = await api.get(`weather?q=${citySearch}&appid=${apiKey}&units=metric&lang=pt_br`);
       setCityWearthData({
         temp: data.main.temp,
         feels_like: data.main.feels_like,
@@ -71,6 +66,13 @@ export const SearchWearthCity = () => {
     }
     setLoading(false);
   };
+  const Loading = () => {
+    return (
+      <View style={{ marginTop: 15 }}>
+        <ActivityIndicator size="large" color="#fff" />
+      </View>
+    );
+  };
 
   return (
     <View style={{ marginTop: 50, padding: 10 }}>
@@ -86,9 +88,7 @@ export const SearchWearthCity = () => {
         </CustomButton>
       </SearchContainer>
       {loading ? (
-        <View style={{ marginTop: 15 }}>
-          <ActivityIndicator size="large" color="#fff" />
-        </View>
+        <Loading />
       ) : (
         <>
           {Object.keys(currentInformations).length === 0 ? (
@@ -96,22 +96,27 @@ export const SearchWearthCity = () => {
               <TextWhite>Após digitar, clique em buscar</TextWhite>
             </View>
           ) : (
-            <>
+            <DescriptionView>
+              <Title>{currentInformations.cityName}</Title>
               <CurrentInformationView>
-                <Image
-                  source={{ uri: `https://openweathermap.org/img/wn/${currentInformations.weatherIcon}.png` }}
-                  style={{ width: 60, height: 60, backgroundColor: "#3b7cb9", borderRadius: 30 }}
-                />
-                <Title>{currentInformations.cityName}</Title>
-                <WeatherDescription>{currentInformations.weatherDescription}</WeatherDescription>
-                <WeatherTemperature>{Math.floor(currentInformations.temperature)}ºC</WeatherTemperature>
+                <View style={{ flexDirection: "row" }}>
+                  <View style={{ alignItems: "center" }}>
+                    <Image
+                      source={{
+                        uri: `https://openweathermap.org/img/wn/${currentInformations.weatherIcon}.png`,
+                      }}
+                      style={{ width: 60, height: 60, backgroundColor: "rgba(0,0,0,0.2)", borderRadius: 30 }}
+                    />
+                    <WeatherDescription>{currentInformations.weatherDescription}</WeatherDescription>
+                  </View>
+                  <WeatherTemperature>{Math.floor(currentInformations.temperature)}ºC</WeatherTemperature>
+                </View>
+                <View>
+                  <Text>max: {Math.floor(cityWearthData.temp_max)}ºC</Text>
+                  <Text>min: {Math.floor(cityWearthData.temp_min)}ºC</Text>
+                </View>
               </CurrentInformationView>
-              <CardInformations>
-                <TextWhite>Temperatura máxima: {Math.floor(cityWearthData.temp_max)}ºC</TextWhite>
-                <TextWhite>Temperatura máxima: {Math.floor(cityWearthData.temp_min)}ºC</TextWhite>
-                <TextWhite>Sensação termica: {Math.floor(cityWearthData.feels_like)}ºC</TextWhite>
-              </CardInformations>
-            </>
+            </DescriptionView>
           )}
         </>
       )}

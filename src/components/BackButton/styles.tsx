@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 
 export const CustomButton = styled.TouchableOpacity`
   margin-bottom: 10px;
-  background-color: #031b31;
+  background-color: rgba(0, 0, 0, 0.7);
   padding: 10px;
   border-radius: 8px;
   width: 90px;

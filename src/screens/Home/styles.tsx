@@ -5,24 +5,35 @@ export const Container = styled.View`
 `;
 
 export const Title = styled.Text`
-  font-size: 18px;
-  color: #fff;
-  margin: 5px 0px;
+  font-size: 23px;
+  color: rgba(0, 0, 0, 0.7);
+  margin-bottom: 10px;
+`;
+
+export const DescriptionView = styled.View`
+  background-color: #fff;
+  border-radius: 15px;
+  margin: 20px 0px;
+  padding: 10px;
+  elevation: 5;
 `;
 
 export const WeatherTemperature = styled.Text`
-  font-size: 22px;
+  font-size: 45px;
   font-weight: bold;
-  color: #e4f8f8;
+  color: rgba(0, 0, 0, 0.7);
+  margin-left: 20px;
 `;
 
 export const WeatherDescription = styled.Text`
   text-transform: capitalize;
-  color: #ccc;
+  color: rgba(0, 0, 0, 0.7);
+  margin-top: 10px;
 `;
 
 export const CurrentInformationView = styled.View`
   display: flex;
+  flex-direction: row;
   align-items: center;
   padding: 10px;
   border-radius: 15px;
@@ -30,10 +41,11 @@ export const CurrentInformationView = styled.View`
 
 export const NextDaysView = styled.View`
   display: flex;
-  background-color: #3b7cb9;
+  background-color: #fff;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 20px;
   margin-top: 20px;
+  elevation: 5;
 `;
 
 export const NextDaysTitleView = styled.View`
@@ -41,21 +53,24 @@ export const NextDaysTitleView = styled.View`
   flex-direction: row;
   padding: 4px;
   border-bottom-width: 1px;
-  border-color: #fff;
+  border-color: rgba(0, 0, 0, 0.3);
+`;
+
+export const NextDaysTitle = styled.Text`
+  font-size: 16px;
+  margin-left: 8px;
+  color: rgba(0, 0, 0, 0.8);
 `;
 
 export const CustomButton = styled.TouchableOpacity`
   background-color: #fff;
-  padding: 10px;
-  margin: 8px 0px;
-  border-radius: 8px;
-  border: 1px solid #769797;
+  padding: 8px;
+  margin: 3px 0px;
   flex-direction: row;
   align-items: center;
 `;
 
 export const ButtonText = styled.Text`
-  color: #3b7cb9;
-  font-weight: bold;
   margin-left: 6px;
+  color: rgba(0, 0, 0, 0.8);
 `;

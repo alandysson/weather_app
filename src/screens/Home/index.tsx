@@ -1,13 +1,14 @@
 import { requestForegroundPermissionsAsync, getCurrentPositionAsync, Accuracy } from "expo-location";
 import { useState, useEffect } from "react";
-import { View, ActivityIndicator, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { RoutesNavigationProp } from "../../routes";
 import { ShowWeatherInformation } from "./ShowWeatherInformation";
+import { Pulse } from "../../components/Pulse";
 
 export const HomeScreen = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [longitude, setTongitude] = useState<number>();
   const [latitude, setLatitude] = useState<number>();
   const navigation = useNavigation<RoutesNavigationProp>();
@@ -24,7 +25,7 @@ export const HomeScreen = () => {
         setLatitude(coords.latitude);
       }
     } catch (error) {
-      console.error("Erro ao obter permissão:", error);
+      alert("Erro ao obter permissão de localização");
     }
     setLoading(false);
   };
@@ -33,7 +34,9 @@ export const HomeScreen = () => {
     getPermission();
   }, []);
 
-  if (loading) return <ActivityIndicator />;
+  if (loading) {
+    return <Pulse />;
+  }
 
   return (
     <View style={{ marginTop: 50, padding: 10 }}>
