@@ -28,7 +28,7 @@
       [
         "expo-location",
         {
-          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+          "locationAlwaysAndWhenInUsePermission": "Permitir $(PRODUCT_NAME) de usar a localização"
         }
       ]
     ]
