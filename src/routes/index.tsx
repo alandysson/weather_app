@@ -22,7 +22,7 @@ export function Routes() {
         ...DefaultTheme,
         colors: {
           ...DefaultTheme.colors,
-          background: "#29435b",
+          background: "#3b7cb9",
         },
       }}
     >
