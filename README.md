@@ -1,6 +1,6 @@
 ## Desafio de Previsão do Tempo utilizando React Native
 
-# obs: Para o desenvolvimento dessa aplicação, foi utilizada a API da [OpenWeather](https://openweathermap.org/api)
+obs: Para o desenvolvimento dessa aplicação, foi utilizada a API da [OpenWeather](https://openweathermap.org/api)
 
 # Vamos começar
 
